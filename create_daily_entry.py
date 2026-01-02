@@ -55,6 +55,9 @@ def create_daily_entry(target_date=None):
     # Create directory if it doesn't exist
     os.makedirs(month_dir, exist_ok=True)
     
+    # Calculate total days in the year
+    total_days = (datetime(date.year, 12, 31) - datetime(date.year, 1, 1)).days + 1
+    
     # Create the daily entry content
     content = f"""# Day {day_num} - {date.strftime('%B %d, %Y')}
 
@@ -77,7 +80,7 @@ def create_daily_entry(target_date=None):
 - [Link to tutorials, articles, or documentation]
 
 ## 📊 Progress
-- Day {day_num} of 365 complete ✅
+- Day {day_num} of {total_days} complete ✅
 
 ## 💭 Reflections
 [Your thoughts about today's coding session, challenges faced, victories achieved]
@@ -93,7 +96,7 @@ def create_daily_entry(target_date=None):
         f.write(content)
     
     print(f"✅ Created daily entry: {file_path}")
-    print(f"📅 Day {day_num} of 365 ({date.strftime('%B %d, %Y')})")
+    print(f"📅 Day {day_num} of {total_days} ({date.strftime('%B %d, %Y')})")
     print(f"🎯 Don't forget to fill it out and commit your progress!")
     
     return True
